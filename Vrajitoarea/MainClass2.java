@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class MainClass2 { 
+public class MainClass { 
 
     private static List<Integer> values = new LinkedList<Integer>();
 
@@ -11,30 +11,37 @@ public class MainClass2 {
 
     private static void Problema1() {
         try {
-            File source = new File("cufar.in");
+            File source = new File("IO_files/12-cufar.in");
             Scanner sc = new Scanner(source);
 
             int p = 0, n = 0;   //p is useless
             if (sc.hasNextLine()) {
                 p = Integer.parseInt(sc.next());
                 n = Integer.parseInt(sc.next());
-            }
-            //System.out.println(p + " " + n + "\n");
-            for (int i = 0; i < n; i++) {
-                //System.out.println(i);
-                
-                int v = Integer.parseInt(sc.next());
+			}
+
+			long s = 0;	//final result
+
+			if (p == 1) {
+				int v = Integer.parseInt(sc.next());
                 int k = Integer.parseInt(sc.next());
-                //System.out.println(v + " " + k);
 
-                values.add(PrimeFactors(v, k));
-            }
-            sc.close();
+				s = PrimeFactors(v, k);
+				sc.close();
+			}
+            else if (p == 2) {
+				for (int i = 0; i < n; i++) {
+					int v = Integer.parseInt(sc.next());
+					int k = Integer.parseInt(sc.next());
 
-            int s = 0;
-            for (int val : values)
-                s += val;
-
+					values.add(PrimeFactors(v, k));
+				}
+				sc.close();
+				
+				for (int val : values)
+					s += val;
+			}
+				
             File output = new File("cufar.out");
             PrintWriter pw = new PrintWriter(output);
             pw.println(s);
@@ -66,7 +73,7 @@ public class MainClass2 {
         if (n > 2)
             divisors.add(n);
 
-        //System.out.println(divisors.toString() + " " + divisors.get(k - 1));
-        return divisors.get(k - 1);
+		//System.out.println(divisors.get(k - 1));
+		return divisors.get(k - 1);
     }
 } 
